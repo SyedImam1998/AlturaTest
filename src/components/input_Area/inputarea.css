@@ -1,0 +1,17 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins&display=swap');
+.inputArea{
+    width: 100%;
+    /* border: 1px solid red; */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-bottom: 80px;
+
+}
+
+.inputfield{
+    padding: 1%;
+    font-size: 18px;
+    width: 40%;
+    font-family: 'Poppins', sans-serif;
+}
