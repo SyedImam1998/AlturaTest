@@ -7,8 +7,11 @@ import { walletContext } from '../../App';
 export default function Nft_component() {
   
 
-  const{value1}=React.useContext(walletContext);
+  const{value1,value2,value3}=React.useContext(walletContext);
   const[wallet,setWallet]=value1;
+  const[popUp,setPopup]=value2;
+  const [selected,setSelected]=value3;
+
 
 
 
@@ -26,29 +29,59 @@ const config = {
   useEffect(()=>{
     axios(config)
     .then(response => {
-      let nftList=response['data'].ownedNfts.map((item)=>{
-        let number = item.metadata.name;
-        return{
-          "contractAddress":item.contract.address,
-          "metadata":item.metadata,
-          "openseaUrl":`https://opensea.io/assets/ethereum/${item.contract.address}/${number}`
+      let nftList=response['data'].ownedNfts
+      .filter(item=>item.title)
+      .map((item)=>{
+        console.log(item.title)
+        if(item.title!==''){
 
+          if(item.metadata.image.includes("ipfs://")){
+            console.log(item.metadata.image)
+            let part=item.metadata.image.split("//");
+            const requiredString = part[1]; 
+            let url=`https://ipfs.io/ipfs/${requiredString}`
+
+            item.metadata.image=url;
+        }
+        // let string
+        // const firstSentence = item.metadata.description.match(/^.*?\./)[0];
+        // item.metadata.description=firstSentence;
+         
+          let number = item.metadata.name;
+          return{
+            "contractAddress":item.contract.address,
+            "metadata":item.metadata,
+            "openseaUrl":`https://opensea.io/assets/ethereum/${item.contract.address}/${number}`
+            
+          }
         }
       });
       console.log(response['data'].ownedNfts)
       console.log(nftList);
       setNftList(nftList);
+      console.log("getngft",getNftList)
     
     })
     .catch(error => console.log('error', error));
 
   },[wallet])
+
+  console.log("getngf1t",getNftList)
   return (
     <div className='nft-area'>
       {getNftList.length>0?
         getNftList.map((nft)=>{
+          if(nft.metadata.image.includes("ipfs://")){
+            let part=nft.metadata.image.split("//");
+            const requiredString = part[1]; 
+            let url=`https://ipfs.io/ipfs/${requiredString}`
+            return(
+              <NftCard imageUrl={url} Name={nft.metadata.name} data={nft}></NftCard>
+            )
+
+          }
           return(
-            <NftCard imageUrl={nft.metadata.image} Name={nft.metadata.name}></NftCard>
+            <NftCard imageUrl={nft.metadata.image} Name={nft.metadata.name} data={nft}></NftCard>
           )
 
         })

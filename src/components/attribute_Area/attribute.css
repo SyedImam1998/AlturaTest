@@ -1,0 +1,46 @@
+.att_List{
+    width: 100%;
+    display: flex;
+    flex-wrap: wrap;
+    padding-right: 2%;
+    gap:10px;
+
+}
+
+.att_parent{
+    padding-left:5% ;
+    padding-right:5% ;
+    width:max-content;
+    height: 50px;
+    border: 1px solid rgb(7, 84, 199);
+    border-radius:10px ;
+    /* position: relative; */
+    display: flex;
+    
+    justify-content: center;
+    align-items: center;
+    
+}
+.att_ans{
+    position: relative;
+    transform: translateY(-10%);
+    font-size: 15px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-weight: 700;
+    /* border: 1px solid rgb(10, 3, 3); */
+
+}
+
+.att_que{
+    width: max-content;
+    position: absolute;
+    /* border: 1px solid red; */
+    top:20px;
+    font-size: 10px;
+    font-weight: 100;
+
+
+
+}
