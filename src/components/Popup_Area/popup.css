@@ -161,23 +161,13 @@ a{
     padding-left: 2%;
 }
 .makeOffer button{
-    background-color: transparent;
-    color:#2081E2;
+    /* background-color: transparent; */
+    color:white;
     margin-top: 0%; 
-    padding: 0%; 
-    float: right;
-}
-.makeOffer button::after{
+    /* padding: 0%;  */
 
-    content: "";
-    display: inline-block;
-    width: 8px;
-    height: 8px;
-    background-image: url("../../assets/rightarrow.png");
-    background-repeat: no-repeat;
-    background-size: contain;
-    margin-left: 2px;
 }
+
 
 }
 
