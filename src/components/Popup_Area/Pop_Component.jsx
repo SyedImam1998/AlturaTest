@@ -105,12 +105,14 @@ export default function Pop_Component() {
                   )}
                 </div>
 
-                <div>
-                  <label className="walletAdd">
+                <div className="">
+                  <label className="walletAdd tooltip">
                     Wallet Address:{" "}
                     <a onClick={copy}>
                       {wallet.slice(0, 4)}...{wallet.slice(-3)}
                     </a>
+
+                  <span className="tooltiptext">Click to Copy</span>
                   </label>
                 </div>
                 <div className="makeOffer">
