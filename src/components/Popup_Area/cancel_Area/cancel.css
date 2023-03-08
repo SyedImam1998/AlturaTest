@@ -9,3 +9,12 @@
    border-radius: 30px;
    cursor: pointer;
 }
+@media (width<426px){
+   .cancelArea{
+      bottom: 9%;
+   padding: 1%;
+
+
+   }
+
+}

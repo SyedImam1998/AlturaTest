@@ -8,7 +8,7 @@ export default function InputArea() {
   const[wallet,setWallet]=value1;
   return (
     <div className='inputArea'>
-        <input className='inputfield' onChange={(e)=>setWallet(e.target.value)} placeholder='Enter Wallet Address' type="text"></input>
+        <input className='inputfield' value={wallet} onChange={(e)=>setWallet(e.target.value)} placeholder='Enter Wallet Address' type="text"></input>
     </div>
   )
 }

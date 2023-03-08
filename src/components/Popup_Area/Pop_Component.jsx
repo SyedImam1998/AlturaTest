@@ -11,17 +11,25 @@ export default function Pop_Component() {
   const [popUp, setPopup] = value2;
   const [selected, setSelected] = value3;
 
+  const copy = () => {
+    console.log("copy");
+    navigator.clipboard.writeText(wallet);
+  };
 
-
+  function extractFirstSentence(str) {
+    const regex = /^[^,.]+[,.]/;
+    const match = str.match(regex);
+    if (match) {
+      let sentence = match[0].replace(/,$/, ".");
+      return sentence;
+    }
+    return "";
+  }
   
-
   return (
     <>
       <AnimatePresence mode="wait">
-        {
-          
-        
-        popUp && (
+        {popUp && (
           <m.div
             initial={{ opacity: 0 }}
             animate={{ opacity: 1, transition: { duration: 0.1 } }}
@@ -39,52 +47,81 @@ export default function Pop_Component() {
                   type: "spring",
                 },
               }}
-              exit={{ y:1000, opacity: 0, transition: { duration: 0.6  } }}
+              exit={{ y: 1000, opacity: 0, transition: { duration: 0.6 } }}
               className="popup"
             >
               <div className="section-1">
                 <img src={selected.metadata.image}></img>
               </div>
               <div className="section-2">
+
+                <div className="section-2-child">
+
+               
+
                 <label>{selected.metadata.name}</label>
                 {selected.metadata.hasOwnProperty("description") ? (
                   <label id="description">
-                     {selected.metadata.description.match(/^.*?\./)?selected.metadata.description.match(/^.*?\./)[0]:selected.metadata.description}{" "}
+                    {/* {selected.metadata.description.match(/^.*?\./)
+                      ? selected.metadata.description.match(/^.*?\./)[0]
+                      : selected.metadata.description} */}
 
-                    <a href={selected.openseaUrl} target="_blank">Read more</a>
+                      {extractFirstSentence(selected.metadata.description)}
+                      
+                      
+                      {" "}
+                    <a href={selected.openseaUrl} target="_blank">
+                      Read more
+                    </a>
                   </label>
                 ) : (
                   <></>
                 )}
                 <div className="att_List">
                   {selected.metadata.attributes ? (
-                    <>{
-                    selected.metadata.attributes.map((item, index) => {
-                      if (index < 5) {
-                        return (
-                          <Attribute_Component
-                          value={item.value}
-                          trait={item.trait_type}
-                          ></Attribute_Component>
+                    <>
+                      {selected.metadata.attributes.map((item, index) => {
+                        if (index < 5) {
+                          return (
+                            <Attribute_Component
+                              value={item.value}
+                              trait={item.trait_type}
+                            ></Attribute_Component>
                           );
                         }
-                      })
-                    }
-                    <p style={{cursor:"pointer"}} onClick={()=>window.open(`${selected.openseaUrl}`, '_blank')} className="knowmore">Know More...</p>
-                    
-                      </>
-                  )  : (
+                      })}
+                      <p
+                        style={{ cursor: "pointer" }}
+                        onClick={() =>
+                          window.open(`${selected.openseaUrl}`, "_blank")
+                        }
+                        className="knowmore"
+                      >
+                        Know More...
+                      </p>
+                    </>
+                  ) : (
                     <></>
                   )}
-
-                  
                 </div>
-                
+
                 <div>
-                  <label className="walletAdd">Wallet Address: <a>{wallet.slice(0,5)}</a></label>
+                  <label className="walletAdd">
+                    Wallet Address:{" "}
+                    <a onClick={copy}>
+                      {wallet.slice(0, 4)}...{wallet.slice(-3)}
+                    </a>
+                  </label>
                 </div>
                 <div className="makeOffer">
-                  <button onClick={()=>window.open(`${selected.openseaUrl}`, '_blank')}>Make Offer</button>
+                  <button
+                    onClick={() =>
+                      window.open(`${selected.openseaUrl}`, "_blank")
+                    }
+                  >
+                    Make Offer
+                  </button>
+                </div>
                 </div>
               </div>
             </m.div>

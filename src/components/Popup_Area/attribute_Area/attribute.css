@@ -6,6 +6,12 @@
     gap:10px;
 
 }
+@media (width<426px) {
+    .att_List{
+        display: none;
+    }
+    
+}
 
 .att_parent{
     padding-left:5% ;
@@ -39,5 +45,12 @@
     font-weight: 100;
 
 
+
+}
+@media (width<1028px){
+    .att_ans{
+        font-size: calc(7px + 2 * ((100vw - 320px) / 448));
+
+    }
 
 }

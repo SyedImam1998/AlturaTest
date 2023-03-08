@@ -10,7 +10,7 @@ const queryClient= new QueryClient();
 
 
 function App() {
-  const [wallet, setWallet] = useState("elanhalpern.eth");
+  const [wallet, setWallet] = useState("");
   const[popUp,setPopup]=React.useState(false);
   const [selected,setSelected]=React.useState('');
 

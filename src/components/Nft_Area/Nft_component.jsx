@@ -51,23 +51,33 @@ export default function Nft_component() {
           }
         });
       return nftList;
-  }
+  }   
  
 
-  const { isLoading, data, isError, error } = useQuery("nftData", callApi, {
+
+  const { isLoading, data, isError, error,isFetching } = useQuery(["nftData",wallet], callApi, {
     select: (data) => {
       return dataTransformation(data);
     },
     onSuccess,
+    enabled:!!wallet
     // onError,
   });
-
   if (isLoading) return <Loading_Component></Loading_Component>
+  // if (isFetching) return <div>fetching</div>
   
   if (isError) {
     console.log(error.message)
     return <Error_Component message={error.message}></Error_Component>;
   }
+  if(!wallet){
+    return(<div className="nft-area">
+      <h3>Hello 👋 User...</h3>
+
+    </div>)
+  }
+
+  
 
   return (
     <div className="nft-area">
